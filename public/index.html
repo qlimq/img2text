@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image to text</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <dialog id="dialog">
+        <div>
+            <div class="gap-between">
+                <span>result:</span>
+                <button id="dialog-close">x</button>
+            </div>
+            <div contenteditable id="result"></div>
+            <div class="dialog-right">
+                <button id="result-to-txt">download</button>
+                <button id="result-copy">copy</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog id="error">
+        <div>
+            <div class="gap-between">
+                <span>error!</span>
+                <button id="error-close">x</button>
+            </div>
+            <p>check your internet connection or check status</p>
+        </div>
+    </dialog>
+    <dialog id="about">
+        <div>
+            <div class="gap-between">
+                <span>about</span>
+                <button id="about-close">x</button>
+            </div>
+            <p>a very simple <a href="https://github.com/naptha/tesseract.js" target="_blank">tesseract.js</a> frontend</p>
+            <p>inspired by <a href="https://cobalt.tools" target="_blank">cobalt</a></p>
+            <p><a href="https://github.com/qlimq/img2text" target="_blank">source code</a></p>
+            <br>
+            <p>any images uploaded are not saved</p>
+        </div>
+    </dialog>
+    <main>
+        <div class="inner-container">
+            <h1 style="align-self: center; margin-bottom: 10px;">image to text</h1>
+            <div id="file-zone">
+                <p>select your image</p>
+                <p>or drop it here</p>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+            <div>
+                <select name="lang-select" id="lang-select" autocomplete="on">
+                    <option value="AUTO">Popular languages (slow)</option>
+                    <option value="AFR">Afrikaans</option>
+                    <option value="AMH">Amharic</option>
+                    <option value="ARA">Arabic</option>
+                    <option value="ASM">Assamese</option>
+                    <option value="AZE">Azerbaijani</option>
+                    <option value="AZE">CYRL Azerbaijani - Cyrillic</option>
+                    <option value="BEL">Belarusian</option>
+                    <option value="BEN">Bengali</option>
+                    <option value="BOD">Tibetan</option>
+                    <option value="BOS">Bosnian</option>
+                    <option value="BUL">Bulgarian</option>
+                    <option value="CAT">Catalan; Valencian</option>
+                    <option value="CEB">Cebuano</option>
+                    <option value="CES">Czech</option>
+                    <option value="CHI">SIM Chinese - Simplified</option>
+                    <option value="CHI">TRA Chinese - Traditional</option>
+                    <option value="CHR">Cherokee</option>
+                    <option value="CYM">Welsh</option>
+                    <option value="DAN">Danish</option>
+                    <option value="DEU">German</option>
+                    <option value="DZO">Dzongkha</option>
+                    <option value="ELL">Greek, Modern (1453-)</option>
+                    <option value="ENG">English</option>
+                    <option value="ENM">English, Middle (1100-1500)</option>
+                    <option value="EPO">Esperanto</option>
+                    <option value="EST">Estonian</option>
+                    <option value="EUS">Basque</option>
+                    <option value="FAS">Persian</option>
+                    <option value="FIN">Finnish</option>
+                    <option value="FRA">French</option>
+                    <option value="FRK">German Fraktur</option>
+                    <option value="FRM">French, Middle (ca. 1400-1600)</option>
+                    <option value="GLE">Irish</option>
+                    <option value="GLG">Galician</option>
+                    <option value="GRC">Greek, Ancient (-1453)</option>
+                    <option value="GUJ">Gujarati</option>
+                    <option value="HAT">Haitian; Haitian Creole</option>
+                    <option value="HEB">Hebrew</option>
+                    <option value="HIN">Hindi</option>
+                    <option value="HRV">Croatian</option>
+                    <option value="HUN">Hungarian</option>
+                    <option value="IKU">Inuktitut</option>
+                    <option value="IND">Indonesian</option>
+                    <option value="ISL">Icelandic</option>
+                    <option value="ITA">Italian</option>
+                    <option value="ITA">OLD Italian - Old</option>
+                    <option value="JAV">Javanese</option>
+                    <option value="JPN">Japanese</option>
+                    <option value="KAN">Kannada</option>
+                    <option value="KAT">Georgian</option>
+                    <option value="KAT">OLD Georgian - Old</option>
+                    <option value="KAZ">Kazakh</option>
+                    <option value="KHM">Central Khmer</option>
+                    <option value="KIR">Kirghiz; Kyrgyz</option>
+                    <option value="KOR">Korean</option>
+                    <option value="KUR">Kurdish</option>
+                    <option value="LAO">Lao</option>
+                    <option value="LAT">Latin</option>
+                    <option value="LAV">Latvian</option>
+                    <option value="LIT">Lithuanian</option>
+                    <option value="MAL">Malayalam</option>
+                    <option value="MAR">Marathi</option>
+                    <option value="MKD">Macedonian</option>
+                    <option value="MLT">Maltese</option>
+                    <option value="MSA">Malay</option>
+                    <option value="MYA">Burmese</option>
+                    <option value="NEP">Nepali</option>
+                    <option value="NLD">Dutch; Flemish</option>
+                    <option value="NOR">Norwegian</option>
+                    <option value="ORI">Oriya</option>
+                    <option value="PAN">Panjabi; Punjabi</option>
+                    <option value="POL">Polish</option>
+                    <option value="POR">Portuguese</option>
+                    <option value="PUS">Pushto; Pashto</option>
+                    <option value="RON">Romanian; Moldavian; Moldovan</option>
+                    <option value="RUS">Russian</option>
+                    <option value="SAN">Sanskrit</option>
+                    <option value="SIN">Sinhala; Sinhalese</option>
+                    <option value="SLK">Slovak</option>
+                    <option value="SLV">Slovenian</option>
+                    <option value="SPA">Spanish; Castilian</option>
+                    <option value="SPA">OLD Spanish; Castilian - Old</option>
+                    <option value="SQI">Albanian</option>
+                    <option value="SRP">Serbian</option>
+                    <option value="SRP">LATN Serbian - Latin</option>
+                    <option value="SWA">Swahili</option>
+                    <option value="SWE">Swedish</option>
+                    <option value="SYR">Syriac</option>
+                    <option value="TAM">Tamil</option>
+                    <option value="TEL">Telugu</option>
+                    <option value="TGK">Tajik</option>
+                    <option value="TGL">Tagalog</option>
+                    <option value="THA">Thai</option>
+                    <option value="TIR">Tigrinya</option>
+                    <option value="TUR">Turkish</option>
+                    <option value="UIG">Uighur; Uyghur</option>
+                    <option value="UKR">Ukrainian</option>
+                    <option value="URD">Urdu</option>
+                    <option value="UZB">Uzbek</option>
+                    <option value="UZB">CYRL Uzbek - Cyrillic</option>
+                    <option value="VIE">Vietnamese</option>
+                    <option value="YID">Yiddish</option>
+                </select>
+            </div>
+        </div>
+
+    <a href="#" id="aboutBtn">about</a>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+body,h1,h2,h3,p,textarea{
+    margin: 0;
+    padding: 0;
+}
+:root {
+    color-scheme: light dark;
+  }  
+html,body,main{
+    height: 100vh;
+}
+body{
+    font-family: sans-serif;
+}
+a{
+    color: inherit;
+}
+main{
+    display: grid;
+    place-items: center;
+    user-select: none;
+}
+dialog{
+    border: 2px solid light-dark(black, white);
+    border-radius: 10px;
+    padding: 0;
+}
+dialog > div {
+    padding: 15px;
+}
+#file-zone{
+    border: 2px dashed light-dark(black, white);
+    padding: 70px 150px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    transition: background-color 0.05s;
+    position: relative;
+    transition: 0.1s background-color;
+}
+.loading:after{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    content: 'processing.. \a (may take a minute)';
+    white-space: pre;
+    display: grid;
+    place-items: center;
+    background-color: light-dark(rgb(230,230,230), rgb(34,34,34));
+    animation: flash 1s infinite alternate ease-in-out;
+}
+@keyframes flash {
+    100%{
+        background-color: light-dark(rgb(250,250,250), rgb(64,64,64))
+    }
+}
+#result{
+    max-width: 100ch;
+    max-height: 50ch;
+    white-space: pre;
+    padding: 10px;
+    background-color: light-dark(rgba(0,0,0,0.05), rgba(0,0,0,0.25));
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow-y: scroll;
+}
+#file-zone input {
+    display: none;
+}
+.file-hovered{
+    background-color: light-dark(rgba(0,0,0,0.15), rgba(255,255,255,0.15));
+}
+.gap-between{
+    display: flex;
+    justify-content: space-between;
+}
+.dialog-right{
+    display:flex;
+    justify-content: right;
+    gap: 5px;
+}
+#about{
+    width: 50ch;
+}
+#aboutBtn{
+    position: absolute;
+    bottom: 20px;
+}
+.inner-container{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: end;
+}
